@@ -1,0 +1,188 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      weight:
+        enabled: false
+
+      routes:
+        - id: traffic-service
+          uri: lb://traffic-operations-service
+          predicates:
+            - Path=/api/assignments/**, /api/assignments, /api/admin/**, /api/depot/**, /api/depots/**, /api/vehicles/**, /api/centerpoints/**, /api/allocations/**, /api/shifts/**, /api/shift-assignments/**, /api/roles/**, /api/reports/**, /api/search/**
+        - id: traffic-docs
+          uri: lb://traffic-operations-service
+          predicates:
+            - Path=/traffic-operations-service/v3/api-docs
+
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**,/auth-service/v3/api-docs
+          filters:
+            - RewritePath=/auth-service/(?<path>.*), /$\{path}
+
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**,/user-service/v3/api-docs
+          filters:
+            - RewritePath=/user-service/(?<path>.*), /$\{path}
+
+        - id: driver-service
+          uri: lb://driver-service
+          predicates:
+            - Path=/drivers/**,/driver-service/v3/api-docs,/admin/driver/attendance/**,/admin/driver/attendance
+          filters:
+            - RewritePath=/drivers/(?<path>.*), /$\{path}
+
+        - id: employee-details-service
+          uri: lb://employee-details-service
+          predicates:
+            - Path=/employees/**,/employees,/otp/**,/otp,/ekyc/**,/ekyc,/api/employee-packages/**,/api/employee-packages,/admin/driver/attendance/**,/admin/driver/attendance,/employee-details-service/v3/api-docs
+          filters:
+            - RewritePath=/employee-details-service/(?<path>.*), /$\{path}
+
+        - id: traffic-operations-service-prefixed
+          uri: lb://traffic-operations-service
+          predicates:
+            - Path=/traffic/**
+          filters:
+            - StripPrefix=1
+
+        - id: traffic-operations-service
+          uri: lb://traffic-operations-service
+          predicates:
+            - Path=/api/depot/**,/api/depot,/api/depots/**,/api/depots,/api/vehicles/**,/api/vehicles,/api/centerpoints/**,/api/centerpoints,/api/allocations/**,/api/allocations,/api/t1/**,/api/t1,/api/admin/**,/api/admin,/api/search/**,/api/search,/api/reports/**,/api/reports,/api/shifts/**,/api/shifts,/api/shift-assignments/**,/api/shift-assignments,/api/roles/**,/api/roles,/traffic-operations-service/v3/api-docs
+          filters:
+            - RewritePath=/traffic-operations-service/(?<path>.*), /$\{path}
+
+        - id: cab-registration-service-prefixed
+          uri: lb://cab-registration-service
+          predicates:
+            - Path=/registration/**, /registration, /verification/**, /verification, /api/v1/vendor-packages/**
+
+        - id: quickkyc-service
+          uri: lb://quickkyc-service
+          predicates:
+            - Path=/internal/api/quickkyc/**
+        
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/notifications/**,/notification-service/v3/api-docs
+          filters:
+            - RewritePath=/notification-service/(?<path>.*), /$\{path}
+
+        - id: fleet-service
+          uri: lb://fleet-service
+          predicates:
+            - Path=/fleet/**,/fleet-service/v3/api-docs
+          filters:
+            - StripPrefix=1
+
+        - id: ride-service-prefixed
+          uri: lb://ride-service
+          predicates:
+            - Path=/rides/**
+          filters:
+            - StripPrefix=1
+
+        - id: ride-service-websocket
+          uri: lb://ride-service
+          predicates:
+            - Path=/ws/**,/ws
+
+        - id: ride-service
+          uri: lb://ride-service
+          predicates:
+            - Path=/api/v1/rides/**,/api/v1/driver/**,/api/v1/admin/rides/**,/ride-service/v3/api-docs
+
+        - id: wallet-service
+          uri: lb://wallet-service
+          predicates:
+            - Path=/api/v1/wallet/**, /api/v1/admin/wallet/**, /wallet-service/v3/api-docs
+
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/api/v1/payment/**, /payment-service/v3/api-docs
+
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowedOriginPatterns: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+              - PATCH
+            allowedHeaders: "*"
+            allowCredentials: true
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+jwt:
+  secret: urbanblacksecretkeyurbanblacksecretkey123456
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.netty.http.client: DEBUG
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+# ── Swagger Aggregation ──────────────────────────────────────────
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: Auth Service
+        url: /auth-service/v3/api-docs
+      - name: User Service
+        url: /user-service/v3/api-docs
+      - name: Driver Service
+        url: /driver-service/v3/api-docs
+      - name: Employee Service
+        url: /employee-details-service/v3/api-docs
+      - name: Traffic Service
+        url: /traffic-operations-service/v3/api-docs
+      - name: Cab Service
+        url: /cab-registration-service/v3/api-docs
+      - name: QuickKYC Service
+        url: /quickkyc-service/v3/api-docs
+      - name: Notification Service
+        url: /notification-service/v3/api-docs
+      - name: Fleet Service
+        url: /fleet-service/v3/api-docs
+      - name: Ride Service
+        url: /ride-service/v3/api-docs
+      - name: Wallet Service
+        url: /wallet-service/v3/api-docs

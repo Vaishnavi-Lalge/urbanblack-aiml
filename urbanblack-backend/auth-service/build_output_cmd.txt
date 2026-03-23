@@ -1,0 +1,43 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< com.urbanblack:auth-service >---------------------
+[INFO] Building auth-service 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ auth-service ---
+[INFO] Deleting C:\Users\HP\Desktop\Infra\Urban-Black\urbanblack-backend\auth-service\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ auth-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ auth-service ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 22 source files with javac [debug release 17] to target\classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Users/HP/Desktop/Infra/Urban-Black/urbanblack-backend/auth-service/src/main/java/com/urbanblack/auth/service/AuthService.java:[99,17] cannot find symbol
+  symbol:   method username(java.lang.String)
+  location: class com.urbanblack.common.dto.response.LoginResponseData.LoginResponseDataBuilder
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.657 s
+[INFO] Finished at: 2026-03-12T10:49:55+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project auth-service: Compilation failure
+[ERROR] /C:/Users/HP/Desktop/Infra/Urban-Black/urbanblack-backend/auth-service/src/main/java/com/urbanblack/auth/service/AuthService.java:[99,17] cannot find symbol
+[ERROR]   symbol:   method username(java.lang.String)
+[ERROR]   location: class com.urbanblack.common.dto.response.LoginResponseData.LoginResponseDataBuilder
+[ERROR] 
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

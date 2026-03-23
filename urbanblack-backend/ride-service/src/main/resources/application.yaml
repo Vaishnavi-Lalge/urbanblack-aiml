@@ -1,0 +1,86 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: ride-service
+
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: urbanblack-ride-group
+      auto-offset-reset: earliest
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring:
+          json:
+            trusted:
+              packages: "*"
+            type:
+              mapping: "com.urbanblack.driverservice.event.ShiftStartedEvent:com.urbanblack.rideservice.event.ShiftStartedEvent, com.urbanblack.driverservice.event.ShiftEndedEvent:com.urbanblack.rideservice.event.ShiftEndedEvent"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:rabbitmq}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://postgres:5432/urbanblack_ride}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  data:
+    redis:
+      host: ${REDIS_HOST:redis}
+      port: ${REDIS_PORT:6379}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://eureka-server:8761/eureka}
+
+# ── JWT ─────────────────────────────────────────────────────────
+jwt:
+  secret: ${JWT_SECRET:urbanblacksecretkeyurbanblacksecretkey123456}
+  expiration: ${JWT_EXPIRATION:86400000}
+
+# ── Google Maps ─────────────────────────────────────────────────
+google:
+  maps:
+    api-key: ${GOOGLE_MAPS_API_KEY:AIzaSyBgsKbZcmM1dG7SuIMMPBcP5Ta6_LEYgEc}
+
+# ── Ride Service Config ──────────────────────────────────────────
+ride:
+  nearby-driver-radius-km: 5
+  goal-km-per-shift: 135
+  ride-request-expiry-sec: 180
+  driver-accept-lock-ttl-sec: 5
+
+# ── Swagger / OpenAPI ───────────────────────────────────────────
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+
+# ── Logging ─────────────────────────────────────────────────────
+logging:
+  level:
+    org.springframework.security: DEBUG
+    com.urbanblack.rideservice: DEBUG

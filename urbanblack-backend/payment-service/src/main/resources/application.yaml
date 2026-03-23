@@ -1,0 +1,60 @@
+server:
+  port: 8094
+
+spring:
+  application:
+    name: payment-service
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
+    consumer:
+      group-id: urbanblack-payment-group
+      auto-offset-reset: earliest
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.trusted.packages: "*"
+        spring.json.value.default.type: com.urbanblack.common.event.RideCompletedEvent
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://postgres:5432/urbanblack_payment}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://eureka-server:8761/eureka}
+
+services:
+  wallet:
+    base-url: ${WALLET_SERVICE_URL:http://wallet-service:8080}
+  ride:
+    base-url: ${RIDE_SERVICE_URL:http://ride-service:8089}
+
+payu:
+  key: ${PAYU_KEY:}
+  salt: ${PAYU_SALT:}
+  url: ${PAYU_URL:https://secure.payu.in/_payment}
+  success-url: ${PAYU_SUCCESS_URL:}
+  failure-url: ${PAYU_FAILURE_URL:}
+  verify-hash: ${PAYU_VERIFY_HASH:true}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+

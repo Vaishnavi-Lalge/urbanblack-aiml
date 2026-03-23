@@ -1,0 +1,60 @@
+# ===============================
+# APPLICATION
+# ===============================
+spring:
+  application:
+    name: quickKyc-service
+
+server:
+  port: 8087
+  forward-headers-strategy: framework
+
+# ===============================
+# EUREKA
+# ===============================
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+# ===============================
+# QUICKKYC CONFIG
+# ===============================
+quickkyc:
+  api:
+    key: "5682be91-07f3-4208-bc07-f0477e3a038b"
+    url: "https://api.quickekyc.com/api/v1"
+    mock-mode: false
+
+# ===============================
+# ONGRID (GRIDLINES) CONFIG
+# ===============================
+ongrid:
+  api:
+    key: "oVAtJ7qoi0QmNa3QKnKNKSSs02grgF4L"
+    url: "https://api.gridlines.io/rc-api/fetch-detailed"
+
+# ===============================
+# SWAGGER
+# ===============================
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+# ===============================
+# SMS CONFIG (BestSMS)
+# ===============================
+sms:
+  authkey: 465495ATCUDxC5mg668a6d28cP1
+  sender: THYNKT
+  route: "4"
+  country: "91"
+  dlt:
+    template-id: 1707177218888657510
+    entity-id: "YOUR_19_DIGIT_ENTITY_ID"
+  base-url: http://control.bestsms.co.in/api/sendhttp.php
+  dlt-template: "Dear User, Your Mobile Verification OTP is {otp}. Visit Now https://urbanride.ltd For more details THYNK TECH INDIA"

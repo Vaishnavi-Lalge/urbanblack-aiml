@@ -1,0 +1,24 @@
+# Maven build output
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Log files
+*.log
+
+# IDE files
+.idea/
+*.iml
+.eclipse/
+.settings/
+.project
+.classpath
+*.class
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Spring Boot
+*.pid
