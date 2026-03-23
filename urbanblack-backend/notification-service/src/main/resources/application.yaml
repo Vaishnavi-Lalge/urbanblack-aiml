@@ -1,0 +1,95 @@
+server:
+  port: 8091
+  forward-headers-strategy: framework
+
+spring:
+  application:
+    name: notification-service
+
+  # ─── Database (Notification Logs) ─────────────────────────────────────────
+  datasource:
+    url: jdbc:postgresql://postgres:5432/notification_db
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  # ─── Mail (Gmail SMTP) ────────────────────────────────────────────────────
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: urbanblack63@gmail.com
+    password: nann lrpz uapw zslo
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+        debug: false
+    default-encoding: UTF-8
+
+  # ─── Kafka Consumer ───────────────────────────────────────────────────────
+  # Using Spring's auto-configuration for maximum reliability in Docker
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: notification-service-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.trusted.packages: "*"
+        spring.json.value.default.type: com.urbanblack.notification.dto.EmailRequest
+    # Producer (if needed)
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+# ─── Eureka ──────────────────────────────────────────────────────────────────
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+# ─── Actuator ────────────────────────────────────────────────────────────────
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+# ─── Swagger / OpenAPI ───────────────────────────────────────────────────────
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    try-it-out-enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+    display-request-duration: true
+  packages-to-scan: com.urbanblack.notification.controller
+
+# ─── Logging ─────────────────────────────────────────────────────────────────
+logging:
+  level:
+    root: INFO
+    com.urbanblack.notification: DEBUG
+    org.springframework.kafka: WARN

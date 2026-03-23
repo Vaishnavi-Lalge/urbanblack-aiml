@@ -1,0 +1,17 @@
+28e8c39e51b5 | urbanblack-user-service | urbanblack-user-service-1 | Up 13 minutes
+79ad8340f2d6 | urbanblack-fleet-service | fleet-service | Up 14 minutes
+c3f690d568eb | urbanblack-driver-service | urbanblack-driver-service-1 | Up 13 minutes
+d3921b084056 | urbanblack-notification-service | notification-service | Up 11 minutes
+49bf0d3619ac | urbanblack-cab-service | urbanblack-cab-service-1 | Exited (1) 10 minutes ago
+9553f22276c7 | urbanblack-ride-service | urbanblack-ride-service-1 | Up 13 minutes
+c2c5c864e7f1 | urbanblack-auth-service | urbanblack-auth-service-1 | Up 13 minutes
+ba3e5b6cca33 | urbanblack-employee-details-service | urbanblack-employee-details-service-1 | Up 13 minutes
+65bf0347a69c | urbanblack-traffic-operations-service | urbanblack-traffic-operations-service-1 | Up 13 minutes
+0bf9f68196be | confluentinc/cp-kafka:7.4.0 | kafka | Up 14 minutes
+62091ce7feb0 | urbanblack-quickkyc-service | urbanblack-quickkyc-service-1 | Up 13 minutes
+52f70b24e6bb | urbanblack-api-gateway | urbanblack-api-gateway-1 | Up 13 minutes
+3fc6aac98738 | postgres:15 | postgres | Up 14 minutes (healthy)
+8f3bf33d2e49 | redis:7 | redis | Up 14 minutes
+e62960f51bd6 | confluentinc/cp-zookeeper:7.4.0 | zookeeper | Up 14 minutes
+93191925c794 | urbanblack-eureka-server | eureka-server | Up 14 minutes (healthy)
+27fa82cb99db | urban-black-cab-service | cab-registration-service | Up 53 minutes

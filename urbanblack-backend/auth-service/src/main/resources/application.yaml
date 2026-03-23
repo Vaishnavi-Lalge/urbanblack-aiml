@@ -1,0 +1,47 @@
+server:
+  port: 8081
+  forward-headers-strategy: framework
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/urbanblack_auth
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        default_schema: urbanblack_auth
+        hbm2ddl:
+          create_namespaces: true
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  application:
+    name: auth-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+
+jwt:
+  secret: urbanblacksecretkeyurbanblacksecretkey123456
+  expiration: 604800000
+  access-expiration: 604800000
+  refresh-expiration: 604800000
+
+sms:
+  authkey: 465495ATCUDxC5mg668a6d28cP1
+  sender: THYNKT
+  route: "4"
+  country: "91"
+  dlt:
+    template-id: 1707177218888657510
+    entity-id: "YOUR_19_DIGIT_ENTITY_ID"
+  base-url: http://control.bestsms.co.in/api/sendhttp.php
+  dlt-template: "Dear User, Your Mobile Verification OTP is {otp}. Visit Now https://urbanride.ltd For more details THYNK TECH INDIA"
