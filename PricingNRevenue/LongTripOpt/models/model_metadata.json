@@ -1,8 +1,8 @@
 {
   "trained_at": "2026-03-23T06:53:19.480738",
   "framework": "sklearn.HistGradientBoosting (LightGBM-compatible)",
-  "strategy": "50K synthetic + 64 real\u00d750 train  \u2192  16 real held-out test",
-  "fare_formula": "\u20b917.72/slab economy, \u20b922.27 premium, \u20b926.94 airport eco, +19.8% peak (empirically derived from real data)",
+  "strategy": "50K synthetic + 64 real×50 train  →  16 real held-out test",
+  "fare_formula": "₹17.72/slab economy, ₹22.27 premium, ₹26.94 airport eco, +19.8% peak (empirically derived from real data)",
   "n_synthetic": 50000,
   "n_real_train": 64,
   "n_real_test": 16,
