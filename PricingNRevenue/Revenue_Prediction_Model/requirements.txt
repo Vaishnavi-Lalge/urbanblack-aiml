@@ -7,3 +7,7 @@ xgboost
 scikit-learn
 pandas
 shap
+openpyxl
+schedule
+requests
+python-dotenv

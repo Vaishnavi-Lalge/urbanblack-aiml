@@ -1,33 +1,48 @@
-# ▣ Revenue & Rides Prediction Service
-
-## Overview
-
-The Revenue & Rides Prediction Service is a production-ready Machine Learning API designed for driver-based mobility platforms (e.g., ride-hailing applications).  
-
-It predicts:
-- Expected driver revenue
-- Expected number of rides
-- Earnings and rides range (uncertainty handling)
-- Confidence score
-- Explainability (feature contribution using SHAP)
-- Data drift (input validation against training distribution)
-
-This service is built to integrate seamlessly with backend systems for real-time pricing and driver analytics.
+# ▣ Driver Revenue & Ride Prediction Service  
+## Version: 1.0 (Production Ready – Real Dataset)
 
 ---
 
-## Architecture
+## ▣ Overview
+
+The **Driver Revenue & Ride Prediction Service** is a production-grade Machine Learning system designed for ride-hailing platforms (UrbanBlack, Uber, Ola type systems).
+
+It provides:
+
+- Real-time driver revenue prediction
+- Ride count estimation
+- Business rule-based pricing adjustments
+- Explainability using SHAP
+- Drift detection for data validation
+- Monitoring and logging
+- Automated daily retraining pipeline
+
+---
+
+## ▣ Key Features
+
+- Real-world pricing logic (₹55 base + ₹25/km)
+- Bonus logic (₹12/km after 135 km)
+- Night and weather surge handling
+- Google Maps integration (distance + duration)
+- Fully automated ML pipeline
+- IST timezone consistency (Asia/Kolkata)
+
+---
+
+## ▣ Architecture
 
 ```
 
-Client (App / Backend)
+Client (Backend / Mobile App)
 │
 ▼
 FastAPI Service (/predict)
 │
-├── Feature Engineering
-├── Revenue Model (XGBoost)
-├── Rides Model (XGBoost)
+├── Maps Service (Distance & Duration)
+├── Feature Pipeline
+├── ML Models (Revenue + Rides)
+├── Pricing Engine (Business Rules)
 ├── Explainability (SHAP)
 ├── Drift Detection
 └── Monitoring Layer
@@ -39,39 +54,44 @@ JSON Response
 
 ---
 
-## Tech Stack
+## ▣ Tech Stack
 
 - Python 3.11+
-- FastAPI (API layer)
-- XGBoost (ML models)
-- Scikit-learn (preprocessing, scaling)
-- SHAP (explainability)
-- Uvicorn (ASGI server)
+- FastAPI
+- Scikit-learn
+- XGBoost
+- SHAP
+- Uvicorn
+- Google Maps API
+- Schedule (automation)
 
 ---
 
-## Installation
+## ▣ Installation
 
-### 1. Clone Repository
-
+### Clone Repository
 ```bash
 git clone <repo_url>
-cd <project_folder>
+cd Revenue_Prediction_Model
 ````
 
-### 2. Install Dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Run API Server
+---
+
+## ▣ Running the System
+
+### Run API Server
 
 ```bash
 uvicorn api.app:app --reload
 ```
 
-### 4. Access API Docs
+Access API Docs:
 
 ```
 http://127.0.0.1:8000/docs
@@ -79,199 +99,189 @@ http://127.0.0.1:8000/docs
 
 ---
 
-## API Endpoint
+## ▣ Commands (Operational Guide)
+
+### Run Full ML Pipeline (Manual)
+
+```bash
+python -m pipelines.daily_pipeline
+```
+
+---
+
+### Start Auto Retraining Scheduler
+
+```bash
+python -m training.retrain_scheduler
+```
+
+Runs daily at **02:00 AM IST**
+
+---
+
+### Run Only Preprocessing
+
+```bash
+python -m preprocessing.run_preprocess
+```
+
+---
+
+### Run Only Training
+
+```bash
+python -m training.train
+```
+
+---
+
+### Test API
+
+```bash
+python tests/test_api.py
+```
+
+---
+
+## ▣ Pipeline Modes
+
+### Manual Mode
+
+```bash
+python -m pipelines.daily_pipeline
+```
+
+---
+
+### Automated Mode
+
+```bash
+python -m training.retrain_scheduler
+```
+
+* Executes daily at 02:00 AM IST
+* Automatically updates models
+
+---
+
+### Real-Time Mode
+
+```bash
+uvicorn api.app:app --reload
+```
+
+* Uses latest trained models
+* No retraining during inference
+
+---
+
+## ▣ API Endpoint
 
 ### POST `/predict`
 
-#### Request Format (application/json)
+### Request Example
 
 ```json
 {
-  "driver_id": 15,
-  "hour": 9,
-  "day_of_week": 2,
-  "rides_count": 5,
-  "total_ride_km": 22,
-  "total_km": 28,
-  "ride_km": 22,
-  "dead_km": 6,
+  "pickup_lat": 18.5204,
+  "pickup_lng": 73.8567,
+  "drop_lat": 18.7041,
+  "drop_lng": 73.7997,
+  "hour_of_day": 18,
   "driver_rating": 4.7,
-  "total_trips": 1200,
-  "shift_hours": 12,
-  "weather_factor": 1.1,
-  "traffic_factor": 0.9,
-  "surge": 1.5
+  "driver_total_trips": 1200,
+  "driver_shift_hours_elapsed": 6,
+  "total_op_km_today": 90,
+  "surge_multiplier": 1.3,
+  "zone_surge_multiplier": 1.2,
+  "number_of_rides_in_zone": 80,
+  "number_of_active_drivers_in_zone": 25,
+  "is_raining": false,
+  "waiting_time_min": 5
 }
 ```
 
 ---
 
-## Response Format
+### Response Example
 
 ```json
 {
   "prediction_status": "success",
-  "predicted_revenue": 685.07,
-  "predicted_rides": 5,
-  "earnings_range": "₹616.56 - ₹753.58",
-  "rides_range": "4 - 5 rides",
-  "confidence": 0.81,
-  "explainability": [
-    {
-      "feature": "total_ride_km",
-      "impact": 210.63
-    }
-  ],
-  "drift": {
-    "hour": {
-      "value": 9,
-      "z_score": 0.36,
-      "drift": false
-    }
-  }
+  "predicted_revenue": 1034.21,
+  "predicted_rides": 12,
+  "earnings_range": "₹930.79 - ₹1137.63",
+  "rides_range": "11 - 13 rides",
+  "confidence": 0.64,
+  "explainability": [...],
+  "drift": {...}
 }
 ```
 
 ---
 
-## Field Definitions
+## ▣ Prediction Logic
 
-### Input Fields
+### Revenue Calculation
 
-| Field          | Description                       |
-| -------------- | --------------------------------- |
-| driver_id      | Unique driver identifier          |
-| hour           | Current hour (0–23)               |
-| day_of_week    | Day index (0–6)                   |
-| rides_count    | Completed rides in current window |
-| total_ride_km  | Distance with passengers          |
-| total_km       | Total distance traveled           |
-| ride_km        | Passenger ride distance           |
-| dead_km        | Distance without passengers       |
-| driver_rating  | Driver rating (3.5–5.0)           |
-| total_trips    | Historical trips count            |
-| shift_hours    | Active working hours              |
-| weather_factor | Weather impact multiplier         |
-| traffic_factor | Traffic condition multiplier      |
-| surge          | Dynamic pricing multiplier        |
+* ML model predicts base revenue
+* Adjusted using:
+
+  * Base fare (₹55)
+  * ₹25 per km
+  * Surge multiplier
+  * Night charge (+25%)
+  * Weather surge (10–20%)
+  * Waiting charges
+  * Bonus (₹12/km beyond 135 km)
 
 ---
 
-### Output Fields
+### Ride Prediction
 
-| Field             | Description                       |
-| ----------------- | --------------------------------- |
-| prediction_status | API execution status              |
-| predicted_revenue | Estimated revenue                 |
-| predicted_rides   | Estimated number of rides         |
-| earnings_range    | Revenue range (uncertainty band)  |
-| rides_range       | Ride count range                  |
-| confidence        | Prediction confidence score       |
-| explainability    | Feature-level contribution        |
-| drift             | Input validation vs training data |
+* ML-based prediction
+* Aligned with:
+
+  * 25 min per ride
+  * 12-hour shift logic
 
 ---
 
-## Explainability
+## ▣ Explainability
 
-This service uses SHAP (SHapley Additive Explanations) to provide feature-level contributions for each prediction.
+Uses SHAP values to identify feature impact:
 
-Example:
-
-* total_ride_km → major contributor
-* surge → pricing multiplier effect
-* weather_factor → demand influence
-
-This ensures transparency and interpretability of model outputs.
+* trip_distance
+* surge_multiplier
+* demand_supply_ratio
+* driver_rating
 
 ---
 
-## Drift Detection
+## ▣ Drift Detection
 
-The system validates incoming inputs against training distribution using z-score.
-
-* drift = false → safe prediction
-* drift = true → out-of-distribution input
-
-This helps maintain reliability in production environments.
+* Z-score based validation
+* Detects out-of-distribution inputs
 
 ---
 
-## Integration Guide
+## ▣ Monitoring
 
-### Backend Integration Flow
+Logs every prediction:
 
-```
-Backend Service
-      │
-      ▼
-Send POST /predict (JSON)
-      │
-      ▼
-Receive Prediction Response
-      │
-      ▼
-Store / Display in Application
-```
+* Input data
+* Output prediction
+* Timestamp (IST)
 
----
-
-### Example (Python)
-
-```python
-import requests
-
-url = "http://127.0.0.1:8000/predict"
-
-data = {
-    "driver_id": 15,
-    "hour": 9,
-    "day_of_week": 2,
-    "rides_count": 5,
-    "total_ride_km": 22,
-    "total_km": 28,
-    "ride_km": 22,
-    "dead_km": 6,
-    "driver_rating": 4.7,
-    "total_trips": 1200,
-    "shift_hours": 12,
-    "weather_factor": 1.1,
-    "traffic_factor": 0.9,
-    "surge": 1.5
-}
-
-response = requests.post(url, json=data)
-print(response.json())
-```
-
----
-
-## Monitoring
-
-The service logs predictions internally and exposes metrics via:
-
-### GET `/metrics`
-
-Provides:
+### Metrics tracked:
 
 * Total predictions
 * Average revenue
-* Average rides
-* Last prediction
+* Drift occurrences
 
 ---
 
-## Production Considerations
-
-* Replace in-memory logging with persistent storage (PostgreSQL / Kafka)
-* Deploy using Docker + Kubernetes
-* Add authentication (JWT / API Gateway)
-* Enable model versioning
-* Add CI/CD pipeline
-
----
-
-## Folder Structure
+## ▣ Folder Structure
 
 ```
 api/
@@ -280,6 +290,7 @@ model/
 monitoring/
 preprocessing/
 training/
+services/
 explainability/
 utils/
 data/
@@ -287,13 +298,29 @@ data/
 
 ---
 
-## Version
+## ▣ Timezone
 
-Current Version: **v6.0**
+All timestamps follow:
+
+```
+Asia/Kolkata (IST)
+```
 
 ---
 
-## Maintainer
+## ▣ Production Notes
 
-AI/ML Developer – Revenue Prediction System
+* Replace JSON logs with database (PostgreSQL / Kafka)
+* Add authentication (JWT)
+* Add model versioning
+* Deploy using Docker
+* Use CI/CD pipelines
+
+---
+
+## ▣ Maintainer
+
+AI/ML Engineer – Driver Revenue Prediction System
+
+```
 
