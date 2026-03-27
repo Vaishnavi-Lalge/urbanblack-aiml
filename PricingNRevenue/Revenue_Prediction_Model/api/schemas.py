@@ -1,27 +1,25 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
 
 class PredictionRequest(BaseModel):
-    driver_id: int
-    hour: int
-    day_of_week: int
-    rides_count: int
-    total_ride_km: float
-    total_km: float
-    ride_km: float
-    dead_km: float
-    driver_rating: float
-    total_trips: int
-    shift_hours: float
+    pickup_lat: float
+    pickup_lng: float
+    drop_lat: float
+    drop_lng: float
 
-    # 🔥 NEW FEATURES (match training)
-    weather_factor: float = 1.0
-    traffic_factor: float = 1.0
-    surge: float = 1.0
+    hour_of_day: int = Field(ge=0, le=23)
 
+    driver_rating: float = Field(default=4.5, ge=1, le=5)
+    driver_total_trips: int = 1000
+    driver_shift_hours_elapsed: float = 6
 
-class PredictionResponse(BaseModel):
-    predicted_revenue: float
-    predicted_rides: float
-    confidence: float
-    explainability: list
-    drift: dict
+    total_op_km_today: float = 80
+
+    surge_multiplier: float = 1.0
+    zone_surge_multiplier: float = 1.0
+
+    number_of_rides_in_zone: int = 50
+    number_of_active_drivers_in_zone: int = 20
+
+    is_raining: bool = False
+    waiting_time_min: int = 0

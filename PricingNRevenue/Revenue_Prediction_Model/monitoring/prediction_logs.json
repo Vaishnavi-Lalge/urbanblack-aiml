@@ -1,0 +1,1571 @@
+[
+  {
+    "timestamp": "2026-03-26 17:34:55.424116",
+    "input": {
+      "pickup_lat": 18.5204,
+      "pickup_lng": 73.8567,
+      "drop_lat": 18.5314,
+      "drop_lng": 73.8446,
+      "hour_of_day": 23,
+      "driver_rating": 4.5,
+      "driver_total_trips": 1000,
+      "driver_shift_hours_elapsed": 6.0,
+      "total_op_km_today": 80.0,
+      "surge_multiplier": 1.0,
+      "zone_surge_multiplier": 1.0,
+      "number_of_rides_in_zone": 50,
+      "number_of_active_drivers_in_zone": 20,
+      "is_raining": false,
+      "waiting_time_min": 0,
+      "distance_km": 2.48,
+      "duration_min": 7.82
+    },
+    "output": {
+      "prediction_status": "success",
+      "predicted_revenue": -44.31,
+      "predicted_rides": 1,
+      "earnings_range": "\u20b9-39.88 - \u20b9-48.74",
+      "rides_range": "0 - 2 rides",
+      "confidence": -0.04,
+      "explainability": [
+        {
+          "feature": "trip_distance",
+          "impact": -344.4209899902344
+        },
+        {
+          "feature": "driver_total_trips",
+          "impact": -109.0105972290039
+        },
+        {
+          "feature": "surge_multiplier",
+          "impact": -65.3666000366211
+        },
+        {
+          "feature": "driver_shift_hours_elapsed",
+          "impact": 41.27870178222656
+        },
+        {
+          "feature": "total_op_km_today",
+          "impact": -23.841699600219727
+        }
+      ],
+      "drift": {
+        "hour_of_day": {
+          "value": 23.0,
+          "z_score": 1.83,
+          "drift": false
+        },
+        "is_peak_hour": {
+          "value": 0.0,
+          "z_score": -0.6196,
+          "drift": false
+        },
+        "is_night_trip": {
+          "value": 1.0,
+          "z_score": 2.8311,
+          "drift": true
+        },
+        "trip_distance": {
+          "value": 2.48,
+          "z_score": -1.6089,
+          "drift": false
+        },
+        "trip_duration_min": {
+          "value": 7.82,
+          "z_score": -1.2709,
+          "drift": false
+        },
+        "surge_multiplier": {
+          "value": 1.0,
+          "z_score": -1.615,
+          "drift": false
+        },
+        "driver_rating": {
+          "value": 4.5,
+          "z_score": 0.6251,
+          "drift": false
+        },
+        "driver_total_trips": {
+          "value": 1000.0,
+          "z_score": -0.0378,
+          "drift": false
+        },
+        "driver_shift_hours_elapsed": {
+          "value": 6.0,
+          "z_score": -0.7842,
+          "drift": false
+        },
+        "total_op_km_today": {
+          "value": 80.0,
+          "z_score": -0.8818,
+          "drift": false
+        },
+        "number_of_rides_in_zone": {
+          "value": 50.0,
+          "z_score": 0.2466,
+          "drift": false
+        },
+        "number_of_active_drivers_in_zone": {
+          "value": 20.0,
+          "z_score": -0.2414,
+          "drift": false
+        },
+        "zone_surge_multiplier": {
+          "value": 1.0,
+          "z_score": -1.615,
+          "drift": false
+        },
+        "demand_supply_ratio": {
+          "value": 2.380952380952381,
+          "z_score": -0.0672,
+          "drift": false
+        },
+        "ride_efficiency": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-03-26 18:25:36.061562",
+    "input": {
+      "pickup_lat": 18.5204,
+      "pickup_lng": 73.8567,
+      "drop_lat": 18.5314,
+      "drop_lng": 73.8446,
+      "hour_of_day": 18,
+      "driver_rating": 4.7,
+      "driver_total_trips": 1200,
+      "driver_shift_hours_elapsed": 6.0,
+      "total_op_km_today": 90.0,
+      "surge_multiplier": 1.3,
+      "zone_surge_multiplier": 1.2,
+      "number_of_rides_in_zone": 80,
+      "number_of_active_drivers_in_zone": 25,
+      "is_raining": false,
+      "waiting_time_min": 5,
+      "distance_km": 2.48,
+      "duration_min": 7.82
+    },
+    "output": {
+      "prediction_status": "success",
+      "predicted_revenue": 51.15,
+      "predicted_rides": 1,
+      "earnings_range": "\u20b946.03 - \u20b956.27",
+      "rides_range": "1 - 2 rides",
+      "confidence": 0.95,
+      "explainability": [
+        {
+          "feature": "trip_distance",
+          "impact": -1.8307
+        },
+        {
+          "feature": "zone_surge_multiplier",
+          "impact": -0.0739
+        },
+        {
+          "feature": "surge_multiplier",
+          "impact": -0.071
+        },
+        {
+          "feature": "driver_total_trips",
+          "impact": -0.0124
+        },
+        {
+          "feature": "trip_duration_min",
+          "impact": -0.0093
+        }
+      ],
+      "drift": {
+        "hour_of_day": {
+          "value": 18.0,
+          "z_score": 0.8663,
+          "drift": false
+        },
+        "is_peak_hour": {
+          "value": 1.0,
+          "z_score": 1.6139,
+          "drift": false
+        },
+        "is_night_trip": {
+          "value": 0.0,
+          "z_score": -0.3532,
+          "drift": false
+        },
+        "trip_distance": {
+          "value": 2.48,
+          "z_score": -1.6089,
+          "drift": false
+        },
+        "trip_duration_min": {
+          "value": 7.82,
+          "z_score": -1.2709,
+          "drift": false
+        },
+        "surge_multiplier": {
+          "value": 1.3,
+          "z_score": 0.0002,
+          "drift": false
+        },
+        "driver_rating": {
+          "value": 4.7,
+          "z_score": 1.0836,
+          "drift": false
+        },
+        "driver_total_trips": {
+          "value": 1200.0,
+          "z_score": 0.3245,
+          "drift": false
+        },
+        "driver_shift_hours_elapsed": {
+          "value": 6.0,
+          "z_score": -0.7842,
+          "drift": false
+        },
+        "total_op_km_today": {
+          "value": 90.0,
+          "z_score": -0.7947,
+          "drift": false
+        },
+        "number_of_rides_in_zone": {
+          "value": 80.0,
+          "z_score": 1.7115,
+          "drift": false
+        },
+        "number_of_active_drivers_in_zone": {
+          "value": 25.0,
+          "z_score": 0.24,
+          "drift": false
+        },
+        "zone_surge_multiplier": {
+          "value": 1.2,
+          "z_score": -0.5382,
+          "drift": false
+        },
+        "demand_supply_ratio": {
+          "value": 3.076923076923077,
+          "z_score": 0.2685,
+          "drift": false
+        },
+        "ride_efficiency": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "avg_speed": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "rides_per_hour": {
+          "value": 0.7142857142857143,
+          "z_score": -0.0964,
+          "drift": false
+        },
+        "demand_intensity": {
+          "value": 96.0,
+          "z_score": 1.3348,
+          "drift": false
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-03-26 18:25:58.639727",
+    "input": {
+      "pickup_lat": 18.5204,
+      "pickup_lng": 73.8567,
+      "drop_lat": 18.5314,
+      "drop_lng": 73.8446,
+      "hour_of_day": 23,
+      "driver_rating": 4.5,
+      "driver_total_trips": 1000,
+      "driver_shift_hours_elapsed": 6.0,
+      "total_op_km_today": 80.0,
+      "surge_multiplier": 1.0,
+      "zone_surge_multiplier": 1.0,
+      "number_of_rides_in_zone": 50,
+      "number_of_active_drivers_in_zone": 20,
+      "is_raining": false,
+      "waiting_time_min": 0,
+      "distance_km": 2.48,
+      "duration_min": 7.82
+    },
+    "output": {
+      "prediction_status": "success",
+      "predicted_revenue": 51.46,
+      "predicted_rides": 1,
+      "earnings_range": "\u20b946.31 - \u20b956.61",
+      "rides_range": "1 - 2 rides",
+      "confidence": 0.95,
+      "explainability": [
+        {
+          "feature": "trip_distance",
+          "impact": -1.8714
+        },
+        {
+          "feature": "zone_surge_multiplier",
+          "impact": -0.0724
+        },
+        {
+          "feature": "surge_multiplier",
+          "impact": -0.0703
+        },
+        {
+          "feature": "is_night_trip",
+          "impact": 0.0432
+        },
+        {
+          "feature": "driver_total_trips",
+          "impact": -0.0124
+        }
+      ],
+      "drift": {
+        "hour_of_day": {
+          "value": 23.0,
+          "z_score": 1.83,
+          "drift": false
+        },
+        "is_peak_hour": {
+          "value": 0.0,
+          "z_score": -0.6196,
+          "drift": false
+        },
+        "is_night_trip": {
+          "value": 1.0,
+          "z_score": 2.8311,
+          "drift": true
+        },
+        "trip_distance": {
+          "value": 2.48,
+          "z_score": -1.6089,
+          "drift": false
+        },
+        "trip_duration_min": {
+          "value": 7.82,
+          "z_score": -1.2709,
+          "drift": false
+        },
+        "surge_multiplier": {
+          "value": 1.0,
+          "z_score": -1.615,
+          "drift": false
+        },
+        "driver_rating": {
+          "value": 4.5,
+          "z_score": 0.6251,
+          "drift": false
+        },
+        "driver_total_trips": {
+          "value": 1000.0,
+          "z_score": -0.0378,
+          "drift": false
+        },
+        "driver_shift_hours_elapsed": {
+          "value": 6.0,
+          "z_score": -0.7842,
+          "drift": false
+        },
+        "total_op_km_today": {
+          "value": 80.0,
+          "z_score": -0.8818,
+          "drift": false
+        },
+        "number_of_rides_in_zone": {
+          "value": 50.0,
+          "z_score": 0.2466,
+          "drift": false
+        },
+        "number_of_active_drivers_in_zone": {
+          "value": 20.0,
+          "z_score": -0.2414,
+          "drift": false
+        },
+        "zone_surge_multiplier": {
+          "value": 1.0,
+          "z_score": -1.615,
+          "drift": false
+        },
+        "demand_supply_ratio": {
+          "value": 2.380952380952381,
+          "z_score": -0.0672,
+          "drift": false
+        },
+        "ride_efficiency": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "avg_speed": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "rides_per_hour": {
+          "value": 0.7142857142857143,
+          "z_score": -0.0964,
+          "drift": false
+        },
+        "demand_intensity": {
+          "value": 50.0,
+          "z_score": -0.2995,
+          "drift": false
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-03-26 18:29:16.289303",
+    "input": {
+      "pickup_lat": 18.5204,
+      "pickup_lng": 73.8567,
+      "drop_lat": 18.5314,
+      "drop_lng": 73.8446,
+      "hour_of_day": 18,
+      "driver_rating": 4.7,
+      "driver_total_trips": 1200,
+      "driver_shift_hours_elapsed": 6.0,
+      "total_op_km_today": 90.0,
+      "surge_multiplier": 1.3,
+      "zone_surge_multiplier": 1.2,
+      "number_of_rides_in_zone": 80,
+      "number_of_active_drivers_in_zone": 25,
+      "is_raining": false,
+      "waiting_time_min": 5,
+      "distance_km": 2.48,
+      "duration_min": 7.82
+    },
+    "output": {
+      "prediction_status": "success",
+      "predicted_revenue": 71.0,
+      "predicted_rides": 1,
+      "earnings_range": "\u20b963.9 - \u20b978.1",
+      "rides_range": "1 - 2 rides",
+      "confidence": 0.62,
+      "explainability": [
+        {
+          "feature": "trip_distance",
+          "impact": -1.8307
+        },
+        {
+          "feature": "zone_surge_multiplier",
+          "impact": -0.0739
+        },
+        {
+          "feature": "surge_multiplier",
+          "impact": -0.071
+        },
+        {
+          "feature": "driver_total_trips",
+          "impact": -0.0124
+        },
+        {
+          "feature": "trip_duration_min",
+          "impact": -0.0093
+        }
+      ],
+      "drift": {
+        "hour_of_day": {
+          "value": 18.0,
+          "z_score": 0.8663,
+          "drift": false
+        },
+        "is_peak_hour": {
+          "value": 1.0,
+          "z_score": 1.6139,
+          "drift": false
+        },
+        "is_night_trip": {
+          "value": 0.0,
+          "z_score": -0.3532,
+          "drift": false
+        },
+        "trip_distance": {
+          "value": 2.48,
+          "z_score": -1.6089,
+          "drift": false
+        },
+        "trip_duration_min": {
+          "value": 7.82,
+          "z_score": -1.2709,
+          "drift": false
+        },
+        "surge_multiplier": {
+          "value": 1.3,
+          "z_score": 0.0002,
+          "drift": false
+        },
+        "driver_rating": {
+          "value": 4.7,
+          "z_score": 1.0836,
+          "drift": false
+        },
+        "driver_total_trips": {
+          "value": 1200.0,
+          "z_score": 0.3245,
+          "drift": false
+        },
+        "driver_shift_hours_elapsed": {
+          "value": 6.0,
+          "z_score": -0.7842,
+          "drift": false
+        },
+        "total_op_km_today": {
+          "value": 90.0,
+          "z_score": -0.7947,
+          "drift": false
+        },
+        "number_of_rides_in_zone": {
+          "value": 80.0,
+          "z_score": 1.7115,
+          "drift": false
+        },
+        "number_of_active_drivers_in_zone": {
+          "value": 25.0,
+          "z_score": 0.24,
+          "drift": false
+        },
+        "zone_surge_multiplier": {
+          "value": 1.2,
+          "z_score": -0.5382,
+          "drift": false
+        },
+        "demand_supply_ratio": {
+          "value": 3.076923076923077,
+          "z_score": 0.2685,
+          "drift": false
+        },
+        "ride_efficiency": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "avg_speed": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "rides_per_hour": {
+          "value": 0.7142857142857143,
+          "z_score": -0.0964,
+          "drift": false
+        },
+        "demand_intensity": {
+          "value": 96.0,
+          "z_score": 1.3348,
+          "drift": false
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-03-26 18:30:54.915508",
+    "input": {
+      "pickup_lat": 18.5204,
+      "pickup_lng": 73.8567,
+      "drop_lat": 18.5314,
+      "drop_lng": 73.8446,
+      "hour_of_day": 18,
+      "driver_rating": 4.7,
+      "driver_total_trips": 1200,
+      "driver_shift_hours_elapsed": 6.0,
+      "total_op_km_today": 90.0,
+      "surge_multiplier": 1.3,
+      "zone_surge_multiplier": 1.2,
+      "number_of_rides_in_zone": 80,
+      "number_of_active_drivers_in_zone": 25,
+      "is_raining": false,
+      "waiting_time_min": 5,
+      "distance_km": 2.48,
+      "duration_min": 7.82
+    },
+    "output": {
+      "prediction_status": "success",
+      "predicted_revenue": 75.25,
+      "predicted_rides": 1,
+      "earnings_range": "\u20b967.73 - \u20b982.78",
+      "rides_range": "1 - 2 rides",
+      "confidence": 0.54,
+      "explainability": [
+        {
+          "feature": "trip_distance",
+          "impact": -1.8307
+        },
+        {
+          "feature": "zone_surge_multiplier",
+          "impact": -0.0739
+        },
+        {
+          "feature": "surge_multiplier",
+          "impact": -0.071
+        },
+        {
+          "feature": "driver_total_trips",
+          "impact": -0.0124
+        },
+        {
+          "feature": "trip_duration_min",
+          "impact": -0.0093
+        }
+      ],
+      "drift": {
+        "hour_of_day": {
+          "value": 18.0,
+          "z_score": 0.8663,
+          "drift": false
+        },
+        "is_peak_hour": {
+          "value": 1.0,
+          "z_score": 1.6139,
+          "drift": false
+        },
+        "is_night_trip": {
+          "value": 0.0,
+          "z_score": -0.3532,
+          "drift": false
+        },
+        "trip_distance": {
+          "value": 2.48,
+          "z_score": -1.6089,
+          "drift": false
+        },
+        "trip_duration_min": {
+          "value": 7.82,
+          "z_score": -1.2709,
+          "drift": false
+        },
+        "surge_multiplier": {
+          "value": 1.3,
+          "z_score": 0.0002,
+          "drift": false
+        },
+        "driver_rating": {
+          "value": 4.7,
+          "z_score": 1.0836,
+          "drift": false
+        },
+        "driver_total_trips": {
+          "value": 1200.0,
+          "z_score": 0.3245,
+          "drift": false
+        },
+        "driver_shift_hours_elapsed": {
+          "value": 6.0,
+          "z_score": -0.7842,
+          "drift": false
+        },
+        "total_op_km_today": {
+          "value": 90.0,
+          "z_score": -0.7947,
+          "drift": false
+        },
+        "number_of_rides_in_zone": {
+          "value": 80.0,
+          "z_score": 1.7115,
+          "drift": false
+        },
+        "number_of_active_drivers_in_zone": {
+          "value": 25.0,
+          "z_score": 0.24,
+          "drift": false
+        },
+        "zone_surge_multiplier": {
+          "value": 1.2,
+          "z_score": -0.5382,
+          "drift": false
+        },
+        "demand_supply_ratio": {
+          "value": 3.076923076923077,
+          "z_score": 0.2685,
+          "drift": false
+        },
+        "ride_efficiency": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "avg_speed": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "rides_per_hour": {
+          "value": 0.7142857142857143,
+          "z_score": -0.0964,
+          "drift": false
+        },
+        "demand_intensity": {
+          "value": 96.0,
+          "z_score": 1.3348,
+          "drift": false
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-03-26 18:32:30.107442",
+    "input": {
+      "pickup_lat": 18.5204,
+      "pickup_lng": 73.8567,
+      "drop_lat": 18.5314,
+      "drop_lng": 73.8446,
+      "hour_of_day": 18,
+      "driver_rating": 4.7,
+      "driver_total_trips": 1200,
+      "driver_shift_hours_elapsed": 6.0,
+      "total_op_km_today": 90.0,
+      "surge_multiplier": 1.3,
+      "zone_surge_multiplier": 1.2,
+      "number_of_rides_in_zone": 80,
+      "number_of_active_drivers_in_zone": 25,
+      "is_raining": false,
+      "waiting_time_min": 5,
+      "distance_km": 2.48,
+      "duration_min": 7.82
+    },
+    "output": {
+      "prediction_status": "success",
+      "predicted_revenue": 76.67,
+      "predicted_rides": 1,
+      "earnings_range": "\u20b969.0 - \u20b984.34",
+      "rides_range": "1 - 2 rides",
+      "confidence": 0.51,
+      "explainability": [
+        {
+          "feature": "trip_distance",
+          "impact": -1.8307
+        },
+        {
+          "feature": "zone_surge_multiplier",
+          "impact": -0.0739
+        },
+        {
+          "feature": "surge_multiplier",
+          "impact": -0.071
+        },
+        {
+          "feature": "driver_total_trips",
+          "impact": -0.0124
+        },
+        {
+          "feature": "trip_duration_min",
+          "impact": -0.0093
+        }
+      ],
+      "drift": {
+        "hour_of_day": {
+          "value": 18.0,
+          "z_score": 0.8663,
+          "drift": false
+        },
+        "is_peak_hour": {
+          "value": 1.0,
+          "z_score": 1.6139,
+          "drift": false
+        },
+        "is_night_trip": {
+          "value": 0.0,
+          "z_score": -0.3532,
+          "drift": false
+        },
+        "trip_distance": {
+          "value": 2.48,
+          "z_score": -1.6089,
+          "drift": false
+        },
+        "trip_duration_min": {
+          "value": 7.82,
+          "z_score": -1.2709,
+          "drift": false
+        },
+        "surge_multiplier": {
+          "value": 1.3,
+          "z_score": 0.0002,
+          "drift": false
+        },
+        "driver_rating": {
+          "value": 4.7,
+          "z_score": 1.0836,
+          "drift": false
+        },
+        "driver_total_trips": {
+          "value": 1200.0,
+          "z_score": 0.3245,
+          "drift": false
+        },
+        "driver_shift_hours_elapsed": {
+          "value": 6.0,
+          "z_score": -0.7842,
+          "drift": false
+        },
+        "total_op_km_today": {
+          "value": 90.0,
+          "z_score": -0.7947,
+          "drift": false
+        },
+        "number_of_rides_in_zone": {
+          "value": 80.0,
+          "z_score": 1.7115,
+          "drift": false
+        },
+        "number_of_active_drivers_in_zone": {
+          "value": 25.0,
+          "z_score": 0.24,
+          "drift": false
+        },
+        "zone_surge_multiplier": {
+          "value": 1.2,
+          "z_score": -0.5382,
+          "drift": false
+        },
+        "demand_supply_ratio": {
+          "value": 3.076923076923077,
+          "z_score": 0.2685,
+          "drift": false
+        },
+        "ride_efficiency": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "avg_speed": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "rides_per_hour": {
+          "value": 0.7142857142857143,
+          "z_score": -0.0964,
+          "drift": false
+        },
+        "demand_intensity": {
+          "value": 96.0,
+          "z_score": 1.3348,
+          "drift": false
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-03-26 18:32:57.842825",
+    "input": {
+      "pickup_lat": 18.5204,
+      "pickup_lng": 73.8567,
+      "drop_lat": 18.5314,
+      "drop_lng": 73.8446,
+      "hour_of_day": 18,
+      "driver_rating": 4.7,
+      "driver_total_trips": 1200,
+      "driver_shift_hours_elapsed": 6.0,
+      "total_op_km_today": 90.0,
+      "surge_multiplier": 1.3,
+      "zone_surge_multiplier": 1.2,
+      "number_of_rides_in_zone": 80,
+      "number_of_active_drivers_in_zone": 25,
+      "is_raining": false,
+      "waiting_time_min": 5,
+      "distance_km": 2.48,
+      "duration_min": 7.82
+    },
+    "output": {
+      "prediction_status": "success",
+      "predicted_revenue": 76.67,
+      "predicted_rides": 1,
+      "earnings_range": "\u20b969.0 - \u20b984.34",
+      "rides_range": "1 - 2 rides",
+      "confidence": 0.51,
+      "explainability": [
+        {
+          "feature": "trip_distance",
+          "impact": -1.8307
+        },
+        {
+          "feature": "zone_surge_multiplier",
+          "impact": -0.0739
+        },
+        {
+          "feature": "surge_multiplier",
+          "impact": -0.071
+        },
+        {
+          "feature": "driver_total_trips",
+          "impact": -0.0124
+        },
+        {
+          "feature": "trip_duration_min",
+          "impact": -0.0093
+        }
+      ],
+      "drift": {
+        "hour_of_day": {
+          "value": 18.0,
+          "z_score": 0.8663,
+          "drift": false
+        },
+        "is_peak_hour": {
+          "value": 1.0,
+          "z_score": 1.6139,
+          "drift": false
+        },
+        "is_night_trip": {
+          "value": 0.0,
+          "z_score": -0.3532,
+          "drift": false
+        },
+        "trip_distance": {
+          "value": 2.48,
+          "z_score": -1.6089,
+          "drift": false
+        },
+        "trip_duration_min": {
+          "value": 7.82,
+          "z_score": -1.2709,
+          "drift": false
+        },
+        "surge_multiplier": {
+          "value": 1.3,
+          "z_score": 0.0002,
+          "drift": false
+        },
+        "driver_rating": {
+          "value": 4.7,
+          "z_score": 1.0836,
+          "drift": false
+        },
+        "driver_total_trips": {
+          "value": 1200.0,
+          "z_score": 0.3245,
+          "drift": false
+        },
+        "driver_shift_hours_elapsed": {
+          "value": 6.0,
+          "z_score": -0.7842,
+          "drift": false
+        },
+        "total_op_km_today": {
+          "value": 90.0,
+          "z_score": -0.7947,
+          "drift": false
+        },
+        "number_of_rides_in_zone": {
+          "value": 80.0,
+          "z_score": 1.7115,
+          "drift": false
+        },
+        "number_of_active_drivers_in_zone": {
+          "value": 25.0,
+          "z_score": 0.24,
+          "drift": false
+        },
+        "zone_surge_multiplier": {
+          "value": 1.2,
+          "z_score": -0.5382,
+          "drift": false
+        },
+        "demand_supply_ratio": {
+          "value": 3.076923076923077,
+          "z_score": 0.2685,
+          "drift": false
+        },
+        "ride_efficiency": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "avg_speed": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "rides_per_hour": {
+          "value": 0.7142857142857143,
+          "z_score": -0.0964,
+          "drift": false
+        },
+        "demand_intensity": {
+          "value": 96.0,
+          "z_score": 1.3348,
+          "drift": false
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-03-26 18:36:17.637454",
+    "input": {
+      "pickup_lat": 18.5204,
+      "pickup_lng": 73.8567,
+      "drop_lat": 18.7041,
+      "drop_lng": 73.7997,
+      "hour_of_day": 18,
+      "driver_rating": 4.7,
+      "driver_total_trips": 1200,
+      "driver_shift_hours_elapsed": 6.0,
+      "total_op_km_today": 90.0,
+      "surge_multiplier": 1.3,
+      "zone_surge_multiplier": 1.2,
+      "number_of_rides_in_zone": 80,
+      "number_of_active_drivers_in_zone": 25,
+      "is_raining": false,
+      "waiting_time_min": 5,
+      "distance_km": 28.62,
+      "duration_min": 58.18
+    },
+    "output": {
+      "prediction_status": "success",
+      "predicted_revenue": 664.78,
+      "predicted_rides": 1,
+      "earnings_range": "\u20b9598.3 - \u20b9731.26",
+      "rides_range": "1 - 2 rides",
+      "confidence": 0.3,
+      "explainability": [
+        {
+          "feature": "trip_distance",
+          "impact": -1.8341
+        },
+        {
+          "feature": "zone_surge_multiplier",
+          "impact": -0.0733
+        },
+        {
+          "feature": "surge_multiplier",
+          "impact": -0.0709
+        },
+        {
+          "feature": "driver_total_trips",
+          "impact": -0.0125
+        },
+        {
+          "feature": "trip_duration_min",
+          "impact": -0.0091
+        }
+      ],
+      "drift": {
+        "hour_of_day": {
+          "value": 18.0,
+          "z_score": 0.8663,
+          "drift": false
+        },
+        "is_peak_hour": {
+          "value": 1.0,
+          "z_score": 1.6139,
+          "drift": false
+        },
+        "is_night_trip": {
+          "value": 0.0,
+          "z_score": -0.3532,
+          "drift": false
+        },
+        "trip_distance": {
+          "value": 28.62,
+          "z_score": 1.1216,
+          "drift": false
+        },
+        "trip_duration_min": {
+          "value": 58.18,
+          "z_score": -0.0253,
+          "drift": false
+        },
+        "surge_multiplier": {
+          "value": 1.3,
+          "z_score": 0.0002,
+          "drift": false
+        },
+        "driver_rating": {
+          "value": 4.7,
+          "z_score": 1.0836,
+          "drift": false
+        },
+        "driver_total_trips": {
+          "value": 1200.0,
+          "z_score": 0.3245,
+          "drift": false
+        },
+        "driver_shift_hours_elapsed": {
+          "value": 6.0,
+          "z_score": -0.7842,
+          "drift": false
+        },
+        "total_op_km_today": {
+          "value": 90.0,
+          "z_score": -0.7947,
+          "drift": false
+        },
+        "number_of_rides_in_zone": {
+          "value": 80.0,
+          "z_score": 1.7115,
+          "drift": false
+        },
+        "number_of_active_drivers_in_zone": {
+          "value": 25.0,
+          "z_score": 0.24,
+          "drift": false
+        },
+        "zone_surge_multiplier": {
+          "value": 1.2,
+          "z_score": -0.5382,
+          "drift": false
+        },
+        "demand_supply_ratio": {
+          "value": 3.076923076923077,
+          "z_score": 0.2685,
+          "drift": false
+        },
+        "ride_efficiency": {
+          "value": 0.4836093274754985,
+          "z_score": 1.4216,
+          "drift": false
+        },
+        "avg_speed": {
+          "value": 0.4836093274754985,
+          "z_score": 1.4216,
+          "drift": false
+        },
+        "rides_per_hour": {
+          "value": 0.7142857142857143,
+          "z_score": -0.0964,
+          "drift": false
+        },
+        "demand_intensity": {
+          "value": 96.0,
+          "z_score": 1.3348,
+          "drift": false
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-03-26 18:41:58.431362",
+    "input": {
+      "pickup_lat": 18.5204,
+      "pickup_lng": 73.8567,
+      "drop_lat": 18.7041,
+      "drop_lng": 73.7997,
+      "hour_of_day": 18,
+      "driver_rating": 4.7,
+      "driver_total_trips": 1200,
+      "driver_shift_hours_elapsed": 6.0,
+      "total_op_km_today": 90.0,
+      "surge_multiplier": 1.3,
+      "zone_surge_multiplier": 1.2,
+      "number_of_rides_in_zone": 80,
+      "number_of_active_drivers_in_zone": 25,
+      "is_raining": false,
+      "waiting_time_min": 5,
+      "distance_km": 28.62,
+      "duration_min": 58.18
+    },
+    "output": {
+      "prediction_status": "success",
+      "predicted_revenue": 1034.21,
+      "predicted_rides": 12,
+      "earnings_range": "\u20b9930.79 - \u20b91137.63",
+      "rides_range": "11 - 13 rides",
+      "confidence": 0.3,
+      "explainability": [
+        {
+          "feature": "trip_distance",
+          "impact": -1.8341
+        },
+        {
+          "feature": "zone_surge_multiplier",
+          "impact": -0.0733
+        },
+        {
+          "feature": "surge_multiplier",
+          "impact": -0.0709
+        },
+        {
+          "feature": "driver_total_trips",
+          "impact": -0.0125
+        },
+        {
+          "feature": "trip_duration_min",
+          "impact": -0.0091
+        }
+      ],
+      "drift": {
+        "hour_of_day": {
+          "value": 18.0,
+          "z_score": 0.8663,
+          "drift": false
+        },
+        "is_peak_hour": {
+          "value": 1.0,
+          "z_score": 1.6139,
+          "drift": false
+        },
+        "is_night_trip": {
+          "value": 0.0,
+          "z_score": -0.3532,
+          "drift": false
+        },
+        "trip_distance": {
+          "value": 28.62,
+          "z_score": 1.1216,
+          "drift": false
+        },
+        "trip_duration_min": {
+          "value": 58.18,
+          "z_score": -0.0253,
+          "drift": false
+        },
+        "surge_multiplier": {
+          "value": 1.3,
+          "z_score": 0.0002,
+          "drift": false
+        },
+        "driver_rating": {
+          "value": 4.7,
+          "z_score": 1.0836,
+          "drift": false
+        },
+        "driver_total_trips": {
+          "value": 1200.0,
+          "z_score": 0.3245,
+          "drift": false
+        },
+        "driver_shift_hours_elapsed": {
+          "value": 6.0,
+          "z_score": -0.7842,
+          "drift": false
+        },
+        "total_op_km_today": {
+          "value": 90.0,
+          "z_score": -0.7947,
+          "drift": false
+        },
+        "number_of_rides_in_zone": {
+          "value": 80.0,
+          "z_score": 1.7115,
+          "drift": false
+        },
+        "number_of_active_drivers_in_zone": {
+          "value": 25.0,
+          "z_score": 0.24,
+          "drift": false
+        },
+        "zone_surge_multiplier": {
+          "value": 1.2,
+          "z_score": -0.5382,
+          "drift": false
+        },
+        "demand_supply_ratio": {
+          "value": 3.076923076923077,
+          "z_score": 0.2685,
+          "drift": false
+        },
+        "ride_efficiency": {
+          "value": 0.4836093274754985,
+          "z_score": 1.4216,
+          "drift": false
+        },
+        "avg_speed": {
+          "value": 0.4836093274754985,
+          "z_score": 1.4216,
+          "drift": false
+        },
+        "rides_per_hour": {
+          "value": 0.7142857142857143,
+          "z_score": -0.0964,
+          "drift": false
+        },
+        "demand_intensity": {
+          "value": 96.0,
+          "z_score": 1.3348,
+          "drift": false
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-03-26 19:24:21 IST",
+    "input": {
+      "pickup_lat": 18.5204,
+      "pickup_lng": 73.8567,
+      "drop_lat": 18.7041,
+      "drop_lng": 73.7997,
+      "hour_of_day": 18,
+      "driver_rating": 4.7,
+      "driver_total_trips": 1200,
+      "driver_shift_hours_elapsed": 6.0,
+      "total_op_km_today": 90.0,
+      "surge_multiplier": 1.3,
+      "zone_surge_multiplier": 1.2,
+      "number_of_rides_in_zone": 80,
+      "number_of_active_drivers_in_zone": 25,
+      "is_raining": false,
+      "waiting_time_min": 5,
+      "distance_km": 28.62,
+      "duration_min": 58.18
+    },
+    "output": {
+      "prediction_status": "success",
+      "predicted_revenue": 1034.21,
+      "predicted_rides": 12,
+      "earnings_range": "\u20b9930.79 - \u20b91137.63",
+      "rides_range": "11 - 13 rides",
+      "confidence": 0.3,
+      "explainability": [
+        {
+          "feature": "trip_distance",
+          "impact": -1.8341
+        },
+        {
+          "feature": "zone_surge_multiplier",
+          "impact": -0.0733
+        },
+        {
+          "feature": "surge_multiplier",
+          "impact": -0.0709
+        },
+        {
+          "feature": "driver_total_trips",
+          "impact": -0.0125
+        },
+        {
+          "feature": "trip_duration_min",
+          "impact": -0.0091
+        }
+      ],
+      "drift": {
+        "hour_of_day": {
+          "value": 18.0,
+          "z_score": 0.8663,
+          "drift": false
+        },
+        "is_peak_hour": {
+          "value": 1.0,
+          "z_score": 1.6139,
+          "drift": false
+        },
+        "is_night_trip": {
+          "value": 0.0,
+          "z_score": -0.3532,
+          "drift": false
+        },
+        "trip_distance": {
+          "value": 28.62,
+          "z_score": 1.1216,
+          "drift": false
+        },
+        "trip_duration_min": {
+          "value": 58.18,
+          "z_score": -0.0253,
+          "drift": false
+        },
+        "surge_multiplier": {
+          "value": 1.3,
+          "z_score": 0.0002,
+          "drift": false
+        },
+        "driver_rating": {
+          "value": 4.7,
+          "z_score": 1.0836,
+          "drift": false
+        },
+        "driver_total_trips": {
+          "value": 1200.0,
+          "z_score": 0.3245,
+          "drift": false
+        },
+        "driver_shift_hours_elapsed": {
+          "value": 6.0,
+          "z_score": -0.7842,
+          "drift": false
+        },
+        "total_op_km_today": {
+          "value": 90.0,
+          "z_score": -0.7947,
+          "drift": false
+        },
+        "number_of_rides_in_zone": {
+          "value": 80.0,
+          "z_score": 1.7115,
+          "drift": false
+        },
+        "number_of_active_drivers_in_zone": {
+          "value": 25.0,
+          "z_score": 0.24,
+          "drift": false
+        },
+        "zone_surge_multiplier": {
+          "value": 1.2,
+          "z_score": -0.5382,
+          "drift": false
+        },
+        "demand_supply_ratio": {
+          "value": 3.076923076923077,
+          "z_score": 0.2685,
+          "drift": false
+        },
+        "ride_efficiency": {
+          "value": 0.4836093274754985,
+          "z_score": 1.4216,
+          "drift": false
+        },
+        "avg_speed": {
+          "value": 0.4836093274754985,
+          "z_score": 1.4216,
+          "drift": false
+        },
+        "rides_per_hour": {
+          "value": 0.7142857142857143,
+          "z_score": -0.0964,
+          "drift": false
+        },
+        "demand_intensity": {
+          "value": 96.0,
+          "z_score": 1.3348,
+          "drift": false
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-03-26 19:26:00 IST",
+    "input": {
+      "pickup_lat": 18.5204,
+      "pickup_lng": 73.8567,
+      "drop_lat": 18.5314,
+      "drop_lng": 73.8446,
+      "hour_of_day": 18,
+      "driver_rating": 4.7,
+      "driver_total_trips": 1200,
+      "driver_shift_hours_elapsed": 6.0,
+      "total_op_km_today": 90.0,
+      "surge_multiplier": 1.3,
+      "zone_surge_multiplier": 1.2,
+      "number_of_rides_in_zone": 80,
+      "number_of_active_drivers_in_zone": 25,
+      "is_raining": false,
+      "waiting_time_min": 5,
+      "distance_km": 2.48,
+      "duration_min": 7.82
+    },
+    "output": {
+      "prediction_status": "success",
+      "predicted_revenue": 116.73,
+      "predicted_rides": 81,
+      "earnings_range": "\u20b9105.06 - \u20b9128.4",
+      "rides_range": "80 - 82 rides",
+      "confidence": 0.3,
+      "explainability": [
+        {
+          "feature": "trip_distance",
+          "impact": -1.8307
+        },
+        {
+          "feature": "zone_surge_multiplier",
+          "impact": -0.0739
+        },
+        {
+          "feature": "surge_multiplier",
+          "impact": -0.071
+        },
+        {
+          "feature": "driver_total_trips",
+          "impact": -0.0124
+        },
+        {
+          "feature": "trip_duration_min",
+          "impact": -0.0093
+        }
+      ],
+      "drift": {
+        "hour_of_day": {
+          "value": 18.0,
+          "z_score": 0.8663,
+          "drift": false
+        },
+        "is_peak_hour": {
+          "value": 1.0,
+          "z_score": 1.6139,
+          "drift": false
+        },
+        "is_night_trip": {
+          "value": 0.0,
+          "z_score": -0.3532,
+          "drift": false
+        },
+        "trip_distance": {
+          "value": 2.48,
+          "z_score": -1.6089,
+          "drift": false
+        },
+        "trip_duration_min": {
+          "value": 7.82,
+          "z_score": -1.2709,
+          "drift": false
+        },
+        "surge_multiplier": {
+          "value": 1.3,
+          "z_score": 0.0002,
+          "drift": false
+        },
+        "driver_rating": {
+          "value": 4.7,
+          "z_score": 1.0836,
+          "drift": false
+        },
+        "driver_total_trips": {
+          "value": 1200.0,
+          "z_score": 0.3245,
+          "drift": false
+        },
+        "driver_shift_hours_elapsed": {
+          "value": 6.0,
+          "z_score": -0.7842,
+          "drift": false
+        },
+        "total_op_km_today": {
+          "value": 90.0,
+          "z_score": -0.7947,
+          "drift": false
+        },
+        "number_of_rides_in_zone": {
+          "value": 80.0,
+          "z_score": 1.7115,
+          "drift": false
+        },
+        "number_of_active_drivers_in_zone": {
+          "value": 25.0,
+          "z_score": 0.24,
+          "drift": false
+        },
+        "zone_surge_multiplier": {
+          "value": 1.2,
+          "z_score": -0.5382,
+          "drift": false
+        },
+        "demand_supply_ratio": {
+          "value": 3.076923076923077,
+          "z_score": 0.2685,
+          "drift": false
+        },
+        "ride_efficiency": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "avg_speed": {
+          "value": 0.2811791383219955,
+          "z_score": -0.4606,
+          "drift": false
+        },
+        "rides_per_hour": {
+          "value": 0.7142857142857143,
+          "z_score": -0.0964,
+          "drift": false
+        },
+        "demand_intensity": {
+          "value": 96.0,
+          "z_score": 1.3348,
+          "drift": false
+        }
+      }
+    }
+  }
+]

@@ -1,64 +1,91 @@
-import time
+import json
+import os
+from datetime import datetime
+from utils.logger import get_logger
+from config.settings import IST
 
-# In-memory store (can replace with DB later)
-metrics_store = []
+logger = get_logger(__name__)
+
+LOG_PATH = "monitoring/prediction_logs.json"
 
 
-def log_prediction(data):
-    """
-    Log prediction safely (supports revenue + rides)
-    """
+def load_logs():
     try:
+        if os.path.exists(LOG_PATH):
+            with open(LOG_PATH, "r") as f:
+                return json.load(f)
+        return []
+    except Exception as e:
+        logger.error(f"❌ Failed to load logs: {str(e)}")
+        return []
+
+
+def save_logs(logs):
+    try:
+        os.makedirs(os.path.dirname(LOG_PATH), exist_ok=True)
+
+        with open(LOG_PATH, "w") as f:
+            json.dump(logs, f, indent=2)
+
+    except Exception as e:
+        logger.error(f"❌ Failed to save logs: {str(e)}")
+
+
+def log_prediction(input_data, prediction_output):
+    try:
+        logs = load_logs()
+
         entry = {
-            "timestamp": time.time(),
-            "input": data.get("input", {}),
-            "predicted_revenue": data.get("predicted_revenue", None),
-            "predicted_rides": data.get("predicted_rides", None)
+            # ✅ IST timestamp
+            "timestamp": datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S IST"),
+            "input": input_data,
+            "output": prediction_output
         }
 
-        metrics_store.append(entry)
+        logs.append(entry)
+
+        # Optional: limit file size (production safety)
+        if len(logs) > 10000:
+            logs = logs[-5000:]
+
+        save_logs(logs)
+
+        logger.info("📊 Prediction logged successfully")
 
     except Exception as e:
-        print("Logging error:", str(e))
+        logger.error(f"❌ Logging failed: {str(e)}", exc_info=True)
 
 
-def get_metrics():
-    """
-    Return monitoring statistics
-    """
+def compute_metrics():
     try:
-        total = len(metrics_store)
+        logs = load_logs()
 
-        avg_revenue = None
-        avg_rides = None
+        if not logs:
+            return {}
 
-        if total > 0:
-            revenues = [
-                x["predicted_revenue"]
-                for x in metrics_store
-                if x["predicted_revenue"] is not None
-            ]
+        total_predictions = len(logs)
 
-            rides = [
-                x["predicted_rides"]
-                for x in metrics_store
-                if x["predicted_rides"] is not None
-            ]
+        revenues = [
+            log["output"].get("predicted_revenue", 0)
+            for log in logs
+        ]
 
-            if revenues:
-                avg_revenue = sum(revenues) / len(revenues)
+        avg_revenue = sum(revenues) / len(revenues)
 
-            if rides:
-                avg_rides = sum(rides) / len(rides)
+        drift_count = sum(
+            any(f["drift"] for f in log["output"].get("drift", {}).values())
+            for log in logs
+        )
 
-        return {
-            "total_predictions": total,
-            "avg_revenue": avg_revenue,
-            "avg_rides": avg_rides,
-            "last_prediction": metrics_store[-1] if total > 0 else None
+        metrics = {
+            "total_predictions": total_predictions,
+            "avg_revenue": round(avg_revenue, 2),
+            "drift_cases": drift_count,
+            "last_updated": datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S IST")
         }
+
+        return metrics
 
     except Exception as e:
-        return {
-            "error": str(e)
-        }
+        logger.error(f"❌ Metrics computation failed: {str(e)}", exc_info=True)
+        return {}
