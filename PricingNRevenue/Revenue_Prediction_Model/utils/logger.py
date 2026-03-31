@@ -1,15 +1,30 @@
 import logging
+from datetime import datetime
+import pytz
 
-def get_logger():
-    logger = logging.getLogger("revenue_model")
-    logger.setLevel(logging.INFO)
+# ✅ IST timezone
+IST = pytz.timezone("Asia/Kolkata")
 
-    if not logger.handlers:
-        ch = logging.StreamHandler()
-        formatter = logging.Formatter(
-            "%(asctime)s - %(levelname)s - %(message)s"
+
+class ISTFormatter(logging.Formatter):
+    def formatTime(self, record, datefmt=None):
+        dt = datetime.fromtimestamp(record.created, IST)
+        return dt.strftime("%Y-%m-%d %H:%M:%S IST")
+
+
+def get_logger(name: str):
+    logger = logging.getLogger(name)
+
+    if not logger.handlers:  # prevent duplicate logs
+        logger.setLevel(logging.INFO)
+
+        console_handler = logging.StreamHandler()
+
+        formatter = ISTFormatter(
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
         )
-        ch.setFormatter(formatter)
-        logger.addHandler(ch)
+
+        console_handler.setFormatter(formatter)
+        logger.addHandler(console_handler)
 
     return logger

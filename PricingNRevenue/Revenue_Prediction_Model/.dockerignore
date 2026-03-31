@@ -1,6 +1,41 @@
+# Python cache
 __pycache__/
 *.pyc
-*.pkl
-*.csv
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
 .env
+
+# Git
 .git
+.gitignore
+
+# Logs
+*.log
+monitoring/prediction_logs.json
+
+# Data (avoid sending huge files)
+data/raw/
+data/processed/
+
+# Model artifacts (optional: exclude if rebuilding inside container)
+model/*.pkl
+model/*.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Tests (optional)
+tests/
