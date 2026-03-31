@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, timezone
-from app.models.schemas import PricingRequest, PricingResponse, FareBreakdown
+from app.models.schemas import PricingRequest, PricingResponse
 from app.services.rule_based_surge import get_rule_based_surge_multiplier
 from app.services.ml_surge_predictor import ml_predictor
 
@@ -9,18 +9,14 @@ class PricingCalculator:
         self.gst_percentage = 0.05
     
     async def calculate(self, request: PricingRequest) -> PricingResponse:
-        # Base Fare Rule: ₹55 for 1.5 km
-        base_fare = 55.0
-        
-        # Additional charge: ₹25 per km 
-        extra_distance = max(0.0, request.estimated_distance_km - 1.5)
-        distance_charge = extra_distance * 25.0
+        # Minimum fare of ₹55, otherwise ₹25 per km for the entire distance
+        ride_fare = max(55.0, request.estimated_distance_km * 25.0)
         
         # Waiting charges: First 5 minutes free, then ₹2 per minute
         chargeable_waiting_time = max(0, request.waiting_time_minutes - 5)
         waiting_charge = chargeable_waiting_time * 2.0
         
-        running_subtotal = base_fare + distance_charge + waiting_charge
+        running_subtotal = ride_fare + waiting_charge
         
         # Night charges: 25% extra
         is_night = request.is_night_trip or request.hour_of_day < 6 or request.hour_of_day >= 22
@@ -63,32 +59,12 @@ class PricingCalculator:
         # Final Fare
         final_fare = taxable_amount + gst_amount + request.toll_cost_estimate
         
-        # Breakdown
-        breakdown = FareBreakdown(
-            base_fare=round(base_fare, 2),
-            distance_charge=round(distance_charge, 2),
-            waiting_charge=round(waiting_charge, 2),
-            night_surcharge=round(night_surcharge, 2),
-            weather_surcharge=round(weather_surcharge, 2),
-            demand_surge_amount=round(demand_surge_amount, 2),
-            toll_component=round(request.toll_cost_estimate, 2),
-            platform_fee=round(platform_fee, 2),
-            gst_amount=round(gst_amount, 2)
-        )
-        
         banner_text = "Standard fare"
         if surge_tier == "mild": banner_text = "High demand"
         elif surge_tier == "moderate": banner_text = "Very high demand"
         elif surge_tier in ["peak", "capped"]: banner_text = "Peak surge active"
 
         return PricingResponse(
-            request_id=request.request_id,
-            surge_multiplier=round(surge_multiplier, 2),
-            surge_tier=surge_tier,
-            final_fare=round(final_fare, 2),
-            fare_breakdown=breakdown,
-            currency="INR",
-            fare_valid_until=datetime.now(timezone.utc) + timedelta(minutes=2),
-            surge_banner_text=banner_text,
-            is_surge_capped=is_surge_capped
+            estimated_computed_fare=round(final_fare, 2),
+            currency="INR"
         )

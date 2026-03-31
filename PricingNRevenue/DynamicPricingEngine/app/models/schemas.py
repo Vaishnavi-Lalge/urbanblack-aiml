@@ -36,12 +36,5 @@ class FareBreakdown(BaseModel):
     gst_amount: float
 
 class PricingResponse(BaseModel):
-    request_id: str
-    surge_multiplier: float
-    surge_tier: str
-    final_fare: float
-    fare_breakdown: FareBreakdown
+    estimated_computed_fare: float
     currency: str = "INR"
-    fare_valid_until: datetime
-    surge_banner_text: str
-    is_surge_capped: bool

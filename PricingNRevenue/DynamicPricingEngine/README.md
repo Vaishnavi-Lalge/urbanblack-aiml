@@ -1,40 +1,48 @@
 # Urban Black - Dynamic Pricing Engine MVP
 
-This repository contains the Dynamic Pricing Engine microservice designed for Urban Black. The engine computes real-time optimal surge pricing algorithms leveraging machine learning, while providing fallback rule-based matrices.
+This microservice acts as the core mathematical engine to structure, apply, and validate financial and logistical rideshare assignments via FastAPI and LightGBM model inferencing.
 
-## Key Features & Rules Implemented
+## 1. Core Fare Rules & Fees
 
-1. **Explicit Fare Structures**:
-    *   Base Fare: ₹55 for the first 1.5 km.
-    *   Distance Charge: ₹25 per additional km.
-    *   Waiting Charge: First 5 minutes free, then ₹2 per minute.
-    *   Taxes & Fees: Configurable Platform Fee + 5% GST strictly applied.
+*   **Distance Charge:** Strictly calculates **₹25 for every kilometer** traveled.
+*   **Minimum Ride Fare:** Even for extremely short distances, the **absolute minimum base fare is ₹55**. *(e.g. 1km trip calculates to ₹25, but is forced to the ₹55 minimum).*
+*   **Waiting Charges:** Drivers wait for passengers. The **first 5 minutes are fully free**. After that grace period ends, it charges exactly **₹2 per minute**.
 
-2. **Contextual Modifiers (Rule-Based & ML)**:
-    *   **Night Surcharge**: 25% extra for rides between 10 PM and 6 AM.
-    *   **Weather Surcharge**: 10-20% modifier depending on `rainfall_mm_per_hour`.
-    *   **Dynamic Demand Surge**: We utilize a trained LightGBM model stored in `/models` that outputs dynamic tier (Normal, Mild, Moderate, Peak, Capped) based on demand-supply ratios.
+## 2. Contextual & Environmental Surcharges
 
-3. **Driver Shift Validation**:
-    *   The service contains logic tracking whether drivers meet strict allocation criteria.
-    *   Constraints tracked: Minimum 25 rides, Minimum 12 hours, Minimum 135 km distance.
+*   **Night Shift Premium:** Any trip made strictly between **10:00 PM (22:00) and 6:00 AM (06:00)** automatically applies a **25% multiplier** on top of the subtotal.
+*   **Weather Surcharge:** Sourced from real-time metrics:
+    *   **Heavy Rain (> 10.0 mm/hr):** High danger, adds an extra **20%** charge.
+    *   **Light/Moderate Rain (> 2.0 mm/hr):** General inconvenience, adds an extra **10%** charge.
 
-## Architecture
+## 3. Dynamic Supply & Demand (AI Engine)
 
-* **Framework**: FastAPI (async HTTP parsing and validations with Pydantic)
-* **ML Layer**: LightGBM (Regression modeling over supply/demand multipliers)
-* **Data Sources**: Model successfully retrained with the provided realistic trip log dataset, `utr_fare_dataset_7500.csv`.
+*   **LightGBM Real-Time Surge:** A custom-trained machine learning model processes active conditions and maps the zone demand against traffic and historic trip logs.
+*   **Surge Caps and Tiers:**
+    *   `< 1.2x` = **Normal Demand**
+    *   `1.2x to 1.6x` = **Mild Surge**
+    *   `1.6x to 2.2x` = **Moderate Surge**
+    *   `2.2x to 2.5x` = **Peak Surge**
+    *   `> 2.5x` = **CAPPED**. Max allowed legal surge multiplier applied by the engine is 2.5x the fare.
+*   *(Rule-Based Fallback)*: If the Machine Learning model is completely disconnected, the engine maps mathematical ratios of available drivers vs active events directly into these same tiers.
 
-## API Endpoints
+## 4. Taxes & Operational Fees
 
-* `POST /api/v1/pricing/compute-fare` 
-  Computes the fare breakdown for an incoming ride request and applies dynamic surge.
-* `POST /api/v1/driver/shift-status`
-  Verifies whether a driver's ongoing shift metrics fulfill exactly the constraints required for their depot/center-point allocation.
+*   **Platform Operations Fee:** The application system incurs a **5% flat fee** applied to the (Fare + Surge). 
+*   **GST Taxation:** A strictly mandatory **5% GST** is applied evenly to the entire taxable chunk (Fare + Surge + Platform Fee). 
+*   **Toll Exemptions:** Any `toll_cost_estimate` is completely separate and tacked onto the absolute end, escaping GST application as per taxation norms.
 
-## Testing & Deployment
+## 5. Driver Verification & Shift Logic
 
-Run local verification via:
+The engine explicitly validates whether a driver respects the requirements required for their specific depot/center-point allocation.
+
+*   **Minimum Target Rides:** Driver must complete >= **25 rides**.
+*   **Minimum Target Distance:** Driver must actively drive >= **135 km**.
+*   **Minimum Target Shift Hours:** Driver must remain actively online >= **12.0 hours**.
+
+## Available Setup & Execution
+
+Run local verification and test via the Swagger Sandbox at `/docs`:
 ```bash
-python test_pricing.py
+uvicorn app.main:app --port 8000 --reload
 ```
